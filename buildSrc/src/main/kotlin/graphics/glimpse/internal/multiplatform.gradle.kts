@@ -31,7 +31,7 @@ plugins {
 tasks {
     artifacts {
         archives(
-            create<Jar>("javadocJar") {
+            register<Jar>("javadocJar") {
                 dependsOn.add(dokkaHtml)
                 archiveClassifier.set("javadoc")
                 from(dokkaHtml)
@@ -41,25 +41,21 @@ tasks {
 }
 
 kotlin {
-    android {
+    androidTarget {
         publishLibraryVariants("debug", "release")
     }
 
-    jvm(name = "desktop") {
-        compilations.all {
-            jvmToolchain(11)
-            kotlinOptions.jvmTarget = "11"
-        }
-    }
+    jvm(name = "desktop")
+    jvmToolchain(17)
 }
 
 android {
-    compileSdk = 33
+    compileSdk = 34
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
@@ -95,7 +91,7 @@ afterEvaluate {
                     licenses {
                         license {
                             name.set("The Apache Software License, Version 2.0")
-                            url.set("http://www.apache.org/licenses/LICENSE-2.0")
+                            url.set("https://www.apache.org/licenses/LICENSE-2.0")
                         }
                     }
                     developers {

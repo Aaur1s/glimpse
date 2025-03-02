@@ -40,7 +40,7 @@ publishing {
                     password = System.getenv(sonatypePasswordProperty)
                 }
             } else {
-                url = project.uri("${project.rootProject.buildDir}/maven")
+                url = project.uri("${project.rootProject.layout.buildDirectory.get().asFile}/maven")
             }
         }
     }

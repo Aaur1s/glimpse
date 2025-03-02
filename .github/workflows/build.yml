@@ -33,7 +33,7 @@ jobs:
         uses: actions/setup-java@v3.11.0
         with:
           distribution: zulu
-          java-version: 11
+          java-version: 17
       - name: Export Properties
         id: properties
         shell: bash
@@ -58,7 +58,7 @@ jobs:
         uses: actions/setup-java@v3.11.0
         with:
           distribution: zulu
-          java-version: 11
+          java-version: 17
       - name: Run Unit Tests
         run: ./gradlew allTests testDebugUnitTest --stacktrace
       - name: Publish Test Report
@@ -97,7 +97,7 @@ jobs:
         uses: actions/setup-java@v3.11.0
         with:
           distribution: zulu
-          java-version: 11
+          java-version: 17
       - name: Generate Documentation
         run: ./gradlew dokkaHtml --stacktrace
 
@@ -124,7 +124,7 @@ jobs:
         uses: actions/setup-java@v3.11.0
         with:
           distribution: zulu
-          java-version: 11
+          java-version: 17
       - name: Generate Documentation
         run: |
           cd glimpse
@@ -172,7 +172,7 @@ jobs:
         uses: actions/setup-java@v3.11.0
         with:
           distribution: zulu
-          java-version: 11
+          java-version: 17
       - name: Assemble Library
         run: ./gradlew assemble --stacktrace
 
@@ -215,7 +215,7 @@ jobs:
         uses: actions/setup-java@v3.11.0
         with:
           distribution: zulu
-          java-version: 11
+          java-version: 17
       - name: Decrypt Key Ring File
         env:
           FILE_PASSPHRASE: ${{ secrets.FILE_PASSPHRASE }}
@@ -239,7 +239,7 @@ jobs:
         uses: actions/setup-java@v3.11.0
         with:
           distribution: zulu
-          java-version: 11
+          java-version: 17
       - name: Decrypt Key Ring File
         env:
           FILE_PASSPHRASE: ${{ secrets.FILE_PASSPHRASE }}

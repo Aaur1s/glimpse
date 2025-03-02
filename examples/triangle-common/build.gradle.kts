@@ -17,19 +17,17 @@
 plugins {
     id("com.android.library")
     kotlin("multiplatform")
-    id("com.google.devtools.ksp") version "1.8.20-1.0.11"
+    id("com.google.devtools.ksp") version "2.1.10-1.0.31"
     id("org.jetbrains.compose")
+    kotlin("plugin.compose")
     id("graphics.glimpse.internal.detekt")
 }
 
 kotlin {
-    android()
+    androidTarget()
 
-    jvm(name = "desktop") {
-        compilations.all {
-            kotlinOptions.jvmTarget = "11"
-        }
-    }
+    jvm(name = "desktop")
+    jvmToolchain(17)
 
     @Suppress("UNUSED_VARIABLE")
     sourceSets {
@@ -62,13 +60,13 @@ kotlin {
                 }
             }
         }
-        val androidTest by getting {
+        val androidUnitTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
             }
         }
         val desktopMain by getting {
-            kotlin.srcDir(file("$buildDir/generated/ksp/desktopMain/kotlin"))
+            kotlin.srcDir(file("${layout.buildDirectory.get().asFile}/generated/ksp/desktopMain/kotlin"))
             resources.srcDir("src/commonAssets")
             dependencies {
                 implementation("org.jogamp.jogl:jogl-all-main:2.4.0")
@@ -93,17 +91,24 @@ android {
         assets.srcDir("src/commonAssets")
     }
     sourceSets["debug"].apply {
-        java.srcDir(File("$buildDir/generated/ksp/androidDebug/kotlin"))
+        java.srcDir(File("${layout.buildDirectory.get().asFile}/generated/ksp/androidDebug/kotlin"))
     }
     sourceSets["release"].apply {
-        java.srcDir(File("$buildDir/generated/ksp/androidRelease/kotlin"))
+        java.srcDir(File("${layout.buildDirectory.get().asFile}/generated/ksp/androidRelease/kotlin"))
     }
     defaultConfig {
         minSdk = 21
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+}
+
+afterEvaluate {
+    // see https://github.com/google/ksp/issues/1589
+    tasks.named("kspKotlinDesktop") {
+        dependsOn("detekt")
     }
 }
 

@@ -26,7 +26,7 @@ tasks {
 
     dokkaHtml {
         moduleName.set("${project.parent?.name}-${project.name}")
-        outputDirectory.set(project.buildDir.resolve("javadoc"))
+        outputDirectory.set(project.layout.buildDirectory.dir("javadoc").get().asFile)
         dokkaSourceSets {
             configureEach {
                 includes.from(project.files("module.md", "packages.md"))

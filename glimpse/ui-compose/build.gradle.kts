@@ -17,6 +17,7 @@
 plugins {
     id("graphics.glimpse.internal.multiplatform")
     id("org.jetbrains.compose")
+    kotlin("plugin.compose")
 }
 
 kotlin {
@@ -38,7 +39,7 @@ kotlin {
             }
         }
         val androidMain by getting
-        val androidTest by getting {
+        val androidUnitTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
             }

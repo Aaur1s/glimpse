@@ -19,15 +19,13 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
+    kotlin("plugin.compose")
     id("graphics.glimpse.internal.detekt")
 }
 
 kotlin {
-    jvm(name = "desktop") {
-        compilations.all {
-            kotlinOptions.jvmTarget = "11"
-        }
-    }
+    jvm(name = "desktop")
+    jvmToolchain(17)
 
     @Suppress("UNUSED_VARIABLE")
     sourceSets {

@@ -34,7 +34,7 @@ kotlin {
                 compileOnly("androidx.annotation:annotation:1.6.0")
             }
         }
-        val androidTest by getting {
+        val androidUnitTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
             }

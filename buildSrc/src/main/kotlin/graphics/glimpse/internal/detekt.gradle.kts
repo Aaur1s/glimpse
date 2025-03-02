@@ -27,8 +27,8 @@ afterEvaluate {
     val kotlin = extensions.getByName("kotlin") as KotlinProjectExtension
 
     detekt {
-        source = project.files(kotlin.sourceSets.flatMap { it.kotlin.sourceDirectories })
-        config = project.files("${project.rootDir}/.config/detekt.yml")
+        source.setFrom(project.files(kotlin.sourceSets.flatMap { it.kotlin.sourceDirectories }))
+        config.setFrom(project.files("${project.rootDir}/.config/detekt.yml"))
         buildUponDefaultConfig = true
     }
 
@@ -36,11 +36,11 @@ afterEvaluate {
         reports {
             xml {
                 required.set(true)
-                outputLocation.set(project.file("${project.buildDir}/reports/detekt.xml"))
+                outputLocation.set(project.file("${project.layout.buildDirectory.get().asFile}/reports/detekt.xml"))
             }
             html {
                 required.set(true)
-                outputLocation.set(project.file("${project.buildDir}/reports/detekt.html"))
+                outputLocation.set(project.file("${project.layout.buildDirectory.get().asFile}/reports/detekt.html"))
             }
         }
     }

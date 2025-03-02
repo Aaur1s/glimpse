@@ -37,7 +37,7 @@ kotlin {
                 implementation(kotlin("stdlib-jdk7"))
             }
         }
-        val androidTest by getting {
+        val androidUnitTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
             }

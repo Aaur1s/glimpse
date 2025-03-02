@@ -18,6 +18,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     id("org.jetbrains.compose")
+    kotlin("plugin.compose")
     id("graphics.glimpse.internal.detekt")
 }
 
@@ -26,12 +27,12 @@ dependencies {
 }
 
 android {
-    compileSdk = 33
+    compileSdk = 34
     namespace = "graphics.glimpse.examples.triangle.android"
     defaultConfig {
         applicationId = "graphics.glimpse.examples.triangle.android"
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = project.version.toString()
     }
@@ -40,9 +41,7 @@ android {
             isMinifyEnabled = false
         }
     }
-    packagingOptions {
-        resources.excludes.add("META-INF/*.kotlin_module")
-    }
+    packaging.resources.excludes.add("META-INF/*.kotlin_module")
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8

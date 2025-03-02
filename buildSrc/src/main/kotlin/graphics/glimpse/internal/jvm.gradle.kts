@@ -28,14 +28,14 @@ plugins {
 tasks {
     artifacts {
         archives(
-            create<Jar>("javadocJar") {
+            register<Jar>("javadocJar") {
                 dependsOn.add(dokkaHtml)
                 archiveClassifier.set("javadoc")
                 from(dokkaHtml)
             }
         )
         archives(
-            create<Jar>("sourcesJar") {
+            register<Jar>("sourcesJar") {
                 archiveClassifier.set("sources")
                 from(sourceSets.named("main").get().allJava.srcDirs)
             }
@@ -65,7 +65,7 @@ afterEvaluate {
                 pom {
                     val gitUrl = "https://github.com/glimpse-graphics/glimpse"
 
-                    name.set("Glimpse ${project.name.replace('-', ' ').capitalize()}")
+                    name.set("Glimpse ${project.name.replace('-', ' ').replaceFirstChar(Char::titlecase)}")
                     description.set("OpenGL made simple")
                     url.set("https://glimpse.graphics/")
 
@@ -77,7 +77,7 @@ afterEvaluate {
                     licenses {
                         license {
                             name.set("The Apache Software License, Version 2.0")
-                            url.set("http://www.apache.org/licenses/LICENSE-2.0")
+                            url.set("https://www.apache.org/licenses/LICENSE-2.0")
                         }
                     }
                     developers {
